@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>增加新书</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>增加新书</h3>
+        <form action="/book/add" method="post">
+            <table border="1">
+                <tr>
+                    <td>编号</td>
+                    <td>
+                        <input type="text" name="sn" required id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td>
+                        <input type="text" required name="name" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>价格</td>
+                    <td>
+                        <input type="text" required name="price" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <textarea name="remark" id="" cols="30" rows="10"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>

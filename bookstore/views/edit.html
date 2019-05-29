@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑书籍</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>编辑书籍</h3>
+        <form action="/book/edit" method="post">
+            <input type="hidden" value="{{book.book_id}}" name="book_id" id="">
+            <!-- 当前第几页，用于当更新数据后，跳到这一页 -->
+            <input type="hidden" value="{{page}}" name="page" id="">
+            <table border="1">
+                <tr>
+                    <td>编号</td>
+                    <td>
+                        <input type="text" name="sn" value="{{book.sn}}" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td>
+                        <input type="text" name="name" value="{{book.name}}" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>价格</td>
+                    <td>
+                        <input type="text" name="price" value="{{book.price}}" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <textarea name="remark" id="" cols="30" rows="10">{{book.remark}}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>

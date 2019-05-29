@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单列表</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>订单列表</h3>
+        <table border="1">
+            <tr>
+                <th>序号</th>
+                <th>订单编号</th>
+                <th>下单时间</th>
+                <th>金额</th>
+                <th>收货地址</th>
+                <th>电话</th>
+                <th>操作</th>
+            </tr>
+            {{each order_list}}
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{$value.order_id}}</td>
+                <td>{{$value.order_time}}</td>
+                <td>￥{{$value.money}}</td>
+                <td>{{$value.addr}}</td>
+                <td>{{$value.phone}}</td>
+                <td>
+                    <a href="/order_item?order_id={{$value.order_id}}">查看订单明细</a>
+                </td>
+            </tr>
+            {{/each}}
+            <tr>
+                <td colspan="7">
+                    一共2条记录，当前页数：1/1
+                    <a href="">首页</a>
+                    <a href="">上一页</a>
+                    <a href="">下一页</a>
+                    <a href="">尾页</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

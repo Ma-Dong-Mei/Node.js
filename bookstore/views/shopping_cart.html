@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>购物车</h3>
+        <table border="1">
+            <tr>
+                <th>序号</th>
+                <th>数量</th>
+                <th>书名</th>
+                <th>价格</th>
+                <th>操作</th>
+            </tr>
+            <!-- 总金额 -->
+            {{set total = 0}}
+            {{each books}}
+            <tr>
+                {{set val = $value}}
+                <td>{{$index + 1}}</td>
+                {{each nums}}
+                <!-- 这里一定要注意“===”不能写成“=” -->
+                {{if val.book_id === $value.book_id}}
+                <td>{{$value.num}}</td>
+                <td>{{val.name}}</td>
+                <td>{{val.price * $value.num}}</td>
+                <!-- 叠加金额 -->
+                <td style="display: none">{{ total += val.price * $value.num}}</td>
+                {{/if}}
+                {{/each}}
+                <td>
+                    <a href="/cart/del?book_id={{val.book_id}}">删除</a>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <form action="/cart" method="post">
+            {{each books}}
+            <div>
+                {{set val = $value}}
+                图书id：<input type="text" value="{{val.book_id}}" name="arr_book_id" id="">
+                {{each nums}}
+                {{if val.book_id === $value.book_id}}
+                数量：<input type="text" value="{{$value.num}}" name="arr_num" id="">
+                {{/if}}
+                {{/each}}
+            </div>
+            {{/each}}
+            总金额：<input type="text" name="money" value="{{total}}" id="">
+            <table border="1">
+                <tr>
+                    <td>送货地址</td>
+                    <td>
+                        <input type="text" name="addr" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>联系电话</td>
+                    <td>
+                        <input type="text" name="phone" id="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交订单" id="">
+                        <a href="">清空购物车</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>

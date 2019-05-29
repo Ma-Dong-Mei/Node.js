@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>书城首页</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>在线书城</h3>
+        <table border="1">
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>书名</th>
+                <th>价格</th>
+                <th>操作</th>
+            </tr>
+            {{each books}}
+            <tr>
+                <!-- 
+                    书籍序号：
+                    (page - 1) * 4 + 1 代表当前页第一条书籍数据的序号；
+                    (page - 1) * 4 + 1 + $index 这里加上索引就可以递增序号，从而显示后续书籍数据的序号。
+                 -->
+                <td>{{(page - 1) * 4 + 1 + $index}}</td>
+                <td>{{$value.sn}}</td>
+                <td>{{$value.name}}</td>
+                <td>￥{{$value.price}}</td>
+                <td>
+                    <a href="/book/add_cart?book_id={{$value.book_id}}">加入购物车</a>
+                    <a href="/book/edit?book_id={{$value.book_id}}&page={{page}}">修改</a>
+                    <a href="/book/del?book_id={{$value.book_id}}">删除</a>
+                </td>
+            </tr>
+            {{/each}}
+            <tr>
+                <td colspan="5">
+                    一共{{length}}条记录，当前页数：{{page}}/{{sumPage}}
+                    <!-- 根据当前页是否是首页或尾页，来显示超链接 -->
+                    {{if page !== 1}}
+                    <a href="/book?page=1">首页</a>
+                    <a href="/book?page={{page - 1}}">上一页</a>
+                    {{else}}
+                    <span>首页</span>
+                    <span>上一页</span>
+                    {{/if}}
+                    {{if page !== sumPage}}
+                    <a href="/book?page={{page + 1}}">下一页</a>
+                    <a href="/book?page={{sumPage}}">尾页</a>
+                    {{else}}
+                    <span>下一页</span>
+                    <span>尾页</span>
+                    {{/if}}
+                </td>
+            </tr>
+        </table>
+        <a href="/book/add">增加新书</a>
+    </div>
+</body>
+
+</html>

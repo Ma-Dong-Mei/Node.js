@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单明细</title>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="/book">书城首页</a></li>
+            <li><a href="/cart">购物车</a></li>
+            <li><a href="/order_list">订单列表</a></li>
+        </ul>
+    </div>
+    <div>
+        <h3>订单明细</h3>
+        <table border="1">
+            <tr>
+                <th>序号</th>
+                <th>订单编号</th>
+                <th>书名</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>小记</th>
+            </tr>
+            <!-- 总金额 -->
+            {{set total = 0}}
+            {{each order_item}}
+            <tr>
+                {{set val = $value}}
+                <td>{{$index + 1}}</td>
+                <td>{{$value.order_id}}</td>
+                {{each book_datas}}
+                <!-- 如果图书 id 一样，那么就可以正确显示相对应的数据 -->
+                {{if val.book_id === $value.book_id}}
+                <td>{{$value.name}}</td>
+                <td>￥{{$value.price}}</td>
+                <td>{{val.num}}件</td>
+                <td>{{val.num * $value.price}}</td>
+                <!-- 叠加金额 -->
+                <td style="display: none">{{ total += val.num * $value.price}}</td>
+                {{/if}}
+                {{/each}}
+            </tr>
+            {{/each}}
+            <tr>
+                <td colspan="6">订单合计：￥{{total}}元</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
