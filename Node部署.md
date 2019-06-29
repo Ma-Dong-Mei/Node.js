@@ -94,7 +94,7 @@ nginx -v
 
 ```shell
 # 通过这个命令查看服务名、pid、占用的端口号
-netstat -lnp
+netstat -tlnp
 # 找到 httpd 的 pid，用 kill 删掉。
 # 有时候需要多删几次才能完全删除。
 kill -9 pid_number
